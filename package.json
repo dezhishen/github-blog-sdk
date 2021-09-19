@@ -18,7 +18,7 @@
     },
     "homepage": "https://github.com/dezhiShen/github-blog-sdk#readme",
     "dependencies": {
-        "github-api": "^3.4.0",
-        "marked": "^3.0.4"
+        "marked": "^3.0.4",
+        "node-fetch": "^3.0.0"
     }
 }
