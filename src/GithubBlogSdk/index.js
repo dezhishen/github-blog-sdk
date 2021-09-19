@@ -74,13 +74,13 @@ class GithubBlogSdk {
         })
     }
 
-    init = () => {
+    initSdk = () => {
         window.renderGithubBlogContent = (url) => {
             this.renderConntent(url)
         }
     }
 
-    render = () => {
+    renderPage = () => {
         this.renderSummary()
         if (window.href.split("#")[1]) {
             this.renderConntent(window.href.split("#")[1])
