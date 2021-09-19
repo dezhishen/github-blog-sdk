@@ -1,2 +1,2 @@
-* [首页](./REAMD.md)
+* [首页](./README.md)
     * [测试](./TEST.md)
