@@ -1,0 +1,24 @@
+{
+    "name": "github-blog-sdk",
+    "version": "1.0.0",
+    "description": "使用`nodejs`,`marked`,`github-nodejs-sdk`快速构建blog",
+    "main": "index.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/dezhiShen/github-blog-sdk.git"
+    },
+    "keywords": [],
+    "author": "https://github.com/dezhiShen",
+    "license": "MIT",
+    "bugs": {
+        "url": "https://github.com/dezhiShen/github-blog-sdk/issues"
+    },
+    "homepage": "https://github.com/dezhiShen/github-blog-sdk#readme",
+    "dependencies": {
+        "github-api": "^3.4.0",
+        "marked": "^3.0.4"
+    }
+}
