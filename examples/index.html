@@ -7,13 +7,15 @@
 
 <head>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/dezhiShen/github-blog-sdk@master/dist/index.css">
-    <script src='https://cdn.jsdelivr.net/gh/dezhiShen/github-blog-sdk@master/dist/index.js'></script>
+    <script
+        src='https://cdn.jsdelivr.net/gh/dezhiShen/github-blog-sdk@527dfde1ae9eddee7ae3b6a04e795ac27cfc4b7b/dist/index.js'></script>
     <script>
         let sdk = new GithubBlogSdk({
             summaryEl: " #summary",
             contextEl: "#context",
-            repo: "github-blog-sdk",
-            owner: "dezhiShen", tree: "master"
+            repo: "blog",
+            owner: "dezhiShen",
+            tree: "master",
         })
         sdk.initSdk()
         sdk.renderPage()

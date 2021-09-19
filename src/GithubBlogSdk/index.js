@@ -95,7 +95,7 @@ class GithubBlogSdk {
 
 const marked2Html = function (url, options) {
     if (url) {
-        fetch(url).then(res => {
+        return fetch(url).then(res => {
             return marked(res.data, options)
         })
     }
