@@ -1,25 +1,67 @@
 <html>
 
 <body>
-    <div id="summary"></div>
-    <div id="content"></div>
-</body>
+    <div id="app">
+        <title>${title}</title>
+        <el-container>
+            <el-aside>
+                <div style="text-align: center;">
+                    <img style="border-radius: 30px;width: 60px;height: 60px;"
+                        src="https://avatars.githubusercontent.com/u/26274059?v=4"><br>
+                    <a href="https://github.com/dezhiShen">github.com</a>
+                </div>
+                <div ref="summary"></div>
+            </el-aside>
+            <el-main>
+                <div ref="content"></div>
+            </el-main>
+        </el-container>
 
-<head>
+    </div>
+
+    <meta charset="utf-8">
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="https://unpkg.com/element-ui/lib/index.js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/dezhiShen/github-blog-sdk@master/dist/index.css">
-    <script
-        src='https://cdn.jsdelivr.net/gh/dezhiShen/github-blog-sdk@527dfde1ae9eddee7ae3b6a04e795ac27cfc4b7b/dist/index.js'></script>
+    <script src='../dist/index.js'></script>
     <script>
-        let sdk = new GithubBlogSdk({
-            summaryEl: " #summary",
-            contextEl: "#context",
-            repo: "blog",
-            owner: "dezhiShen",
-            tree: "master",
+        var vm = new Vue({
+            el: "#app",
+            name: "app",
+            props: {},
+            computed: {},
+            data() {
+                return {
+                    title: "github-blog-sdk-demo"
+                }
+            },
+            methods: {
+                renderSummary: function (url, html) {
+                    this.$refs.summary.innerHTML = html
+                },
+                renderContent: function (url, html, title) {
+                    this.$refs.content.innerHTML = html
+                    if (title) {
+                        this.title = title
+                    }
+                }
+
+            },
+            mounted: function () {
+                let sdk = new GithubBlogSdk({
+                    renderContent: (url, html, title) => {
+                        this.renderContent(url, html, title)
+                    },
+                    renderSummary: (url, html) => {
+                        this.renderSummary(url, html)
+                    }
+
+                })
+                sdk.initSdk()
+            }
         })
-        sdk.initSdk()
-        sdk.renderPage()
+
     </script>
-</head>
 
 </html>

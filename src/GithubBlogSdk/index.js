@@ -1,9 +1,5 @@
 import fetch from 'axios'
 import marked from 'marked'
-import cheerio from 'cheerio'
-
-
-
 
 let renderer = new marked.Renderer()
 renderer.link = (href, title, text) => {
@@ -50,10 +46,17 @@ class GithubBlogSdk {
                 this.markedOptions[key] = markedOptions[key]
             }
         }
+        window.renderGithubBlogContent = (url, title) => {
+            markdown2html(url, this.markedOptions).then(
+                html => {
+                    this.blogOptions.renderContent(url, html, title)
+                }
+            )
+        }
     }
 
     loadSummary = (url = this.blogOptions.summary) => {
-        return marked2Html(url, this.markedOptions)
+        return markdown2html(url, this.markedOptions)
     }
 
     renderSummary = (url = this.blogOptions.summary) => {
@@ -63,7 +66,7 @@ class GithubBlogSdk {
     }
 
     loadConntent = (url) => {
-        return marked2Html(url, this.markedOptions)
+        return markdown2html(url, this.markedOptions)
     }
 
     renderContent = (url) => {
@@ -73,24 +76,25 @@ class GithubBlogSdk {
     }
 
     loadIndex = (url = this.blogOptions.index) => {
-        return marked2Html(url, this.markedOptions)
+        return markdown2html(url, this.markedOptions)
     }
 
     /**
      * 绑定方法
      */
     initSdk = () => {
-        window.renderGithubBlogContent = (url, title) => {
-            marked2Html(url, this.markedOptions).then(
-                html => {
-                    this.blogOptions.renderContent(url, html, title)
-                }
-            )
+        this.renderSummary()
+        let url = window.location.href
+        if (!url.split("#")[1]) {
+            url = this.blogOptions.index
+        } else {
+            url = url.split("#")[1]
         }
+        this.renderContent(url)
     }
 }
 
-const marked2Html = function (url, options) {
+const markdown2html = function (url, options) {
     if (url) {
         return fetch(url).then(res => {
             return marked(res.data, options)
