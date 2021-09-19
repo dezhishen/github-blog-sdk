@@ -1,4 +1,4 @@
-import fetch from 'node-fetch'
+import fetch from 'axios'
 import marked from 'marked'
 
 /**
@@ -59,11 +59,10 @@ class GithubBlogSdk {
 
 const marked2Html = function (url, options) {
     if (url) {
-        return new Promise()
+        fetch(url).then(res => {
+            return marked(res.text(), options)
+        })
     }
-    fetch(url).then(res => {
-        return marked(res.text(), options)
-    })
 }
 
 export default GithubBlogSdk
