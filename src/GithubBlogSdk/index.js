@@ -4,7 +4,9 @@ import cheerio from 'cheerio'
 
 
 
-this.render.link = (href, title, text) => {
+
+let renderer = new marked.Renderer()
+renderer.link = (href, title, text) => {
     if (href.startsWith("http")) {
         return `<a href="${href}" target="_blank">${text}</a>`
     } else {
@@ -26,7 +28,7 @@ class GithubBlogSdk {
     }
 
     markedOptions = {
-        render: this.render,
+        renderer: renderer,
         gfm: true,
         tables: true,
         breaks: false,
