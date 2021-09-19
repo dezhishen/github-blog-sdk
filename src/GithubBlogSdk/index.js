@@ -61,7 +61,7 @@ class GithubBlogSdk {
 
     renderSummary = (url = this.blogOptions.summary) => {
         return this.loadSummary(url, this.markedOptions).then(text => {
-            this.blogOptions.renderSUmmary(url, text)
+            this.blogOptions.renderSummary(url, text)
         })
     }
 
