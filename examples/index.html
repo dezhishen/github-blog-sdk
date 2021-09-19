@@ -1,7 +1,7 @@
 <html>
 <script src='../dist/index.js'></script>
 <script>
-    let sdk = GithubBlogSdk({ repo: "github-blog-sdk", owner: "dezhiShen", tree: "master" })
+    let sdk = new GithubBlogSdk({ repo: "github-blog-sdk", owner: "dezhiShen", tree: "master" })
     sdk.loadSummary().then(res => {
         res.forEach(element => {
             console.log(res)
