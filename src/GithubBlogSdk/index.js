@@ -10,7 +10,7 @@ renderer.link = (href, title, text) => {
     if (href.startsWith("http")) {
         return `<a href="${href}" target="_blank">${text}</a>`
     } else {
-        return `<a href="#${href}" onclick="renderGithubBlogContent('${href}')">${text}</a>`
+        return `<a href="#${href}" onclick="renderGithubBlogContent('${href}','${text}')">${text}</a>`
     }
 }
 /**
@@ -18,13 +18,14 @@ renderer.link = (href, title, text) => {
  */
 class GithubBlogSdk {
     blogOptions = {
-        contentEl: "#github-blog-content",
-        summaryEl: "#github-blog-summary",
         index: "./README.md",
-        repo: "",
-        owner: "",
-        tree: "",
-        summary: "./SUMMARY.md"
+        summary: "./SUMMARY.md",
+        renderContent: (url, html, title) => {
+            console.warn("请提供自定义方法")
+        },
+        renderSummary: (url, html) => {
+            console.warn("请提供自定义方法")
+        }
     }
 
     markedOptions = {
@@ -55,43 +56,39 @@ class GithubBlogSdk {
         return marked2Html(url, this.markedOptions)
     }
 
+    renderSummary = (url = this.blogOptions.summary) => {
+        return this.loadSummary(url, this.markedOptions).then(text => {
+            this.blogOptions.renderSUmmary(url, text)
+        })
+    }
+
     loadConntent = (url) => {
         return marked2Html(url, this.markedOptions)
+    }
+
+    renderContent = (url) => {
+        return this.loadConntent(url).then(
+            html => { this.blogOptions.renderContent(url, html) }
+        )
     }
 
     loadIndex = (url = this.blogOptions.index) => {
         return marked2Html(url, this.markedOptions)
     }
 
-    renderSummary = () => {
-        this.loadSummary().then(res => {
-            let $ = cheerio.load(window.document)
-            $(blogOptions.summaryEl).innerHTML = res
-        })
-    }
-    renderConntent = function (url) {
-        this.loadConntent(url).then(res => {
-            let $ = cheerio.load(window.document)
-            $(blogOptions.contentEl).innerHTML = res
-        })
-    }
-
+    /**
+     * 绑定方法
+     */
     initSdk = () => {
-        window.renderGithubBlogContent = (url) => {
-            this.renderConntent(url)
-        }
-    }
-
-    renderPage = () => {
-        this.renderSummary()
-        if (window.href.split("#")[1]) {
-            this.renderConntent(window.href.split("#")[1])
-        } else {
-            this.renderConntent(this.blogOptions.index)
+        window.renderGithubBlogContent = (url, title) => {
+            marked2Html(url, this.markedOptions).then(
+                html => {
+                    this.blogOptions.renderContent(url, html, title)
+                }
+            )
         }
     }
 }
-
 
 const marked2Html = function (url, options) {
     if (url) {
