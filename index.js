@@ -1,5 +1,3 @@
-import { GithubBlogSdk } from './lib/GithubBlogSdk/index.js'
+import GithubBlogSdk from './lib/GithubBlogSdk/index.js'
 
-export {
-    GithubBlogSdk
-}
+export default GithubBlogSdk

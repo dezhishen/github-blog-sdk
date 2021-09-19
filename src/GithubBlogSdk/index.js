@@ -66,4 +66,4 @@ const marked2Html = function (url, options) {
     })
 }
 
-export { GithubBlogSdk }
+export default GithubBlogSdk

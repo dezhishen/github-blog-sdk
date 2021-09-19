@@ -1,12 +1,7 @@
-"use strict";
+import GithubBlogSdk from "../lib/GithubBlogSdk/index"
 
-var _index = require("../lib/GithubBlogSdk/index");
+let sdk = GithubBlogSdk({ repo: "github-blog-sdk", onwer: "dezhiShen", tree: "master" })
 
-var sdk = (0, _index.GithubBlogSdk)({
-    repo: "github-blog-sdk",
-    onwer: "dezhiShen",
-    tree: "master"
-});
-sdk.loadSummary().then(function (data) {
-    console.log(data);
-});
+sdk.loadSummary().then(data => {
+    console.log(data)
+})
