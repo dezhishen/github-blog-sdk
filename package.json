@@ -1,6 +1,6 @@
 {
     "name": "github-blog-sdk",
-    "version": "1.0.0",
+    "version": "0.0.1",
     "description": "使用`nodejs`,`marked`,`github-nodejs-sdk`快速构建blog",
     "main": "index.js",
     "scripts": {
