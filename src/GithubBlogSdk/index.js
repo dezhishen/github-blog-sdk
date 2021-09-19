@@ -50,21 +50,18 @@ class GithubBlogSdk {
     }
 
     loadSummary = (url = this.blogOptions.summary) => {
-        return fetch(
-            `${url}`
-        ).then(res => {
-            return res.data
-        })
+        return marked2Html(url, this.markedOptions)
     }
+
     loadConntent = (url) => {
-        marked2Html(url, this.markedOptions)
+        return marked2Html(url, this.markedOptions)
     }
 
     loadIndex = (url = this.blogOptions.index) => {
         return marked2Html(url, this.markedOptions)
     }
 
-    renderSummary = function () {
+    renderSummary = () => {
         this.loadSummary().then(res => {
             let $ = cheerio.load(window.document)
             $(blogOptions.summaryEl).innerHTML = res
@@ -77,14 +74,14 @@ class GithubBlogSdk {
         })
     }
 
-    init = function () {
+    init = () => {
         window.renderGithubBlogContent = (url) => {
-            this.loadConntent(url)
+            this.renderConntent(url)
         }
     }
 
-    render = function () {
-        this.loadSummary()
+    render = () => {
+        this.renderSummary()
         if (window.href.split("#")[1]) {
             this.renderConntent(window.href.split("#")[1])
         } else {
