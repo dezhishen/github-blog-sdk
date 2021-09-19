@@ -39,7 +39,7 @@ class GithubBlogSdk {
     loadSummary = () => {
         return fetch(
             `https://api.github.com/repos/${this.blogOptions.owner}`
-            + `/${this.blogOptions.repo}/git/trees/${this.blogOptions.tree}`)
+            + `/${this.blogOptions.repo}/git/trees/${this.blogOptions.tree}?recursive=1`)
             .then(res => {
                 return res.data
             })
