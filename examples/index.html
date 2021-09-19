@@ -1,7 +1,12 @@
 <html>
 <script src='../dist/index.js'></script>
 <script>
-    debugger
+    let sdk = GithubBlogSdk({ repo: "github-blog-sdk", owner: "dezhiShen", tree: "master" })
+    sdk.loadSummary().then(res => {
+        res.forEach(element => {
+            console.log(res)
+        });
+    })
     console.log("")
 </script>
 

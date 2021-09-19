@@ -41,7 +41,7 @@ class GithubBlogSdk {
             `https://api.github.com/repos/${this.blogOptions.owner}`
             + `/${this.blogOptions.repo}/git/trees/${this.blogOptions.tree}`)
             .then(res => {
-                return res.json()
+                return res.data
             })
     }
 
@@ -60,7 +60,7 @@ class GithubBlogSdk {
 const marked2Html = function (url, options) {
     if (url) {
         fetch(url).then(res => {
-            return marked(res.text(), options)
+            return marked(res.data, options)
         })
     }
 }
