@@ -1,13 +1,22 @@
 <html>
-<script src='../dist/index.js'></script>
-<script>
-    let sdk = new GithubBlogSdk({ repo: "github-blog-sdk", owner: "dezhiShen", tree: "master" })
-    sdk.loadSummary().then(res => {
-        res.forEach(element => {
-            console.log(res)
-        });
-    })
-    console.log("")
-</script>
+
+<body>
+    <div id="summary"></div>
+    <div id="content"></div>
+</body>
+
+<head>
+    <script src='https://cdn.jsdelivr.net/gh/dezhiShen/github-blog-sdk@master/dist/index.js'></script>
+    <script>
+        let sdk = new GithubBlogSdk({
+            summaryEl: " #summary",
+            contextEl: "#context",
+            repo: "github-blog-sdk",
+            owner: "dezhiShen", tree: "master"
+        })
+        sdk.init()
+        sdk.render()
+    </script>
+</head>
 
 </html>

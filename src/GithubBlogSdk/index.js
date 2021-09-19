@@ -1,19 +1,32 @@
 import fetch from 'axios'
 import marked from 'marked'
+import cheerio from 'cheerio'
 
+
+
+this.render.link = (href, title, text) => {
+    if (href.startsWith("http")) {
+        return `<a href="${href}" target="_blank">${text}</a>`
+    } else {
+        return `<a href="#${href}" onclick="renderGithubBlogContent('${href}')">${text}</a>`
+    }
+}
 /**
  * blog的sdk
  */
 class GithubBlogSdk {
     blogOptions = {
+        contentEl: "#github-blog-content",
+        summaryEl: "#github-blog-summary",
         index: "./README.md",
         repo: "",
         owner: "",
-        tree: ""
-
+        tree: "",
+        summary: "./SUMMARY.md"
     }
 
     markedOptions = {
+        render: this.render,
         gfm: true,
         tables: true,
         breaks: false,
@@ -36,24 +49,48 @@ class GithubBlogSdk {
         }
     }
 
-    loadSummary = () => {
+    loadSummary = (url = this.blogOptions.summary) => {
         return fetch(
-            `https://api.github.com/repos/${this.blogOptions.owner}`
-            + `/${this.blogOptions.repo}/git/trees/${this.blogOptions.tree}?recursive=1`)
-            .then(res => {
-                return res.data
-            })
+            `${url}`
+        ).then(res => {
+            return res.data
+        })
     }
-
     loadConntent = (url) => {
-        return marked2Html(url, this.markedOptions)
+        marked2Html(url, this.markedOptions)
     }
 
     loadIndex = (url = this.blogOptions.index) => {
         return marked2Html(url, this.markedOptions)
     }
 
+    renderSummary = function () {
+        this.loadSummary().then(res => {
+            let $ = cheerio.load(window.document)
+            $(blogOptions.summaryEl).innerHTML = res
+        })
+    }
+    renderConntent = function (url) {
+        this.loadConntent(url).then(res => {
+            let $ = cheerio.load(window.document)
+            $(blogOptions.contentEl).innerHTML = res
+        })
+    }
 
+    init = () => {
+        window.renderGithubBlogContent = (url) => {
+            this.loadConntent(url)
+        }
+    }
+
+    render = () => {
+        this.loadSummary()
+        if (window.href.split("#")[1]) {
+            this.renderConntent(window.href.split("#")[1])
+        } else {
+            this.renderConntent(this.blogOptions.index)
+        }
+    }
 }
 
 
