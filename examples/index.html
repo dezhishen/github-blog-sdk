@@ -12,7 +12,7 @@
                 <div ref="summary"></div>
             </el-aside>
             <el-main>
-                <el-page-header>
+                <el-page-header @back="window.history.go(-1);">
                 </el-page-header>
                 <div ref="content"></div>
             </el-main>
