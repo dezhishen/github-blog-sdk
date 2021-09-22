@@ -4,44 +4,40 @@
     <div id="app">
         <el-drawer title="目录" :visible.sync="drawer" :direction="direction">
             <div>
-                <div style="text-align: center;">
-                    <img style="border-radius: 30px;width: 60px;height: 60px;"
-                        src="https://avatars.githubusercontent.com/u/26274059?v=4"><br>
-                    <a href="https://github.com/dezhiShen">github.com</a>
-                </div>
                 <div ref="summary"></div>
             </div>
         </el-drawer>
-        <div>
-            <div class="float-button">
-                <el-button size="small" type="primary" @click="drawer=true">目录</el-button>
-            </div>
-            <div ref="content"></div>
-        </div>
-        <!-- <el-container>
-            <el-aside>
+        <el-container>
+            <!-- <el-aside>
                 <div style="text-align: center;">
                     <img style="border-radius: 30px;width: 60px;height: 60px;"
                         src="https://avatars.githubusercontent.com/u/26274059?v=4"><br>
                     <a href="https://github.com/dezhiShen">github.com</a>
                 </div>
                 <div ref="summary"></div>
-            </el-aside>
-            <el-main id="main">
+            </el-aside> -->
+            <el-header>
+                <el-row>
+                    <el-col :span="4">
+                        <el-button size="small" type="primary" @click="drawer=true">目录</el-button>
+                    </el-col>
+                    <el-col :span="16">
+                        <div style="text-align: center;"></div>
+                    </el-col>
+                    <el-col :span="4">
+                        <a style="vertical-align:middle;position: fixed; right:5px" href="https://github.com/dezhiShen">
+                            <img style="border-radius: 15px;width: 30px;height: 30px;"
+                                src="https://avatars.githubusercontent.com/u/26274059?v=4"><br>
+                        </a>
+                    </el-col>
+                </el-row>
+            </el-header>
+            <el-main>
                 <div ref="content"></div>
-                <el-backtop target="#main"></el-backtop>
-            </el-main> -->
+            </el-main>
         </el-container>
-
     </div>
 </body>
-<style>
-    .float-button {
-        position: fixed;
-        top: 10px;
-        left: 10px;
-    }
-</style>
 
 <head>
     <meta charset="utf-8">
