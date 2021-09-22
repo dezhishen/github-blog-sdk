@@ -16,16 +16,13 @@
                 </div>
                 <div ref="summary"></div>
             </el-aside> -->
-            <el-header>
+            <el-header style="border-bottom:1px solid #dbdbdb">
                 <el-row>
-                    <el-col :span="4">
+                    <el-col :span="4" style="margin-top: 15px;">
                         <el-button size="small" type="primary" @click="drawer=true">目录</el-button>
                     </el-col>
-                    <el-col :span="16">
-                        <div style="text-align: center;"></div>
-                    </el-col>
-                    <el-col :span="4">
-                        <a style="vertical-align:middle;position: fixed; right:5px" href="https://github.com/dezhiShen">
+                    <el-col :offset="16" :span="4" style="margin-top: 15px;">
+                        <a href="https://github.com/dezhiShen">
                             <img style="border-radius: 15px;width: 30px;height: 30px;"
                                 src="https://avatars.githubusercontent.com/u/26274059?v=4"><br>
                         </a>
