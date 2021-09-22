@@ -19,7 +19,7 @@
             <el-header style="border-bottom:1px solid #dbdbdb">
                 <el-row>
                     <el-col :span="4" style="margin-top: 15px;">
-                        <el-button size="small" type="primary" @click="drawer=true">目录</el-button>
+                        <el-button size="small" type="primary" @click="showSummary()">目录</el-button>
                     </el-col>
                     <el-col :offset="16" :span="4" style="margin-top: 15px;">
                         <a href="https://github.com/dezhiShen">
@@ -55,11 +55,16 @@
                 return {
                     drawer: false,
                     direction: 'ltr',
+                    sumaryHtml: ""
                 }
             },
             methods: {
+                showSummary: function () {
+                    this.drawer = true;
+                    this.$refs.summary.innerHTML = this.sumaryHtml
+                },
                 renderSummary: function (url, html) {
-                    this.$refs.summary.innerHTML = html
+                    this.sumaryHtml = html
                 },
                 renderContent: function (url, html) {
                     this.$refs.content.innerHTML = html
