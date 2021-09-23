@@ -4,7 +4,7 @@
 ## 引入
 cdn
 ```
-<script src="https://cdn.jsdelivr.net/gh/dezhiShen/github-blog-sdk@master/dist/index.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/dezhiShen/github-blog-sdk@tag/dist/index.js"></script>
 ```
 
 ## 使用
