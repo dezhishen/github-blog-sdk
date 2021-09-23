@@ -60,7 +60,7 @@
             },
             methods: {
                 showSummary: function () {
-                    this.drawer = true;
+                    this.drawer = true
                     this.$refs.summary.innerHTML = this.sumaryHtml
                 },
                 renderSummary: function (url, html) {
@@ -68,6 +68,7 @@
                 },
                 renderContent: function (url, html) {
                     this.$refs.content.innerHTML = html
+                    this.drawer = false
                 }
 
             },
