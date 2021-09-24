@@ -4,7 +4,7 @@
     <div id="app">
         <el-drawer title="目录" :visible.sync="drawer" :direction="direction">
             <div>
-                <div ref="summary"></div>
+                <div v-html="summaryHtml"></div>
             </div>
         </el-drawer>
         <el-container>
@@ -55,16 +55,15 @@
                 return {
                     drawer: false,
                     direction: 'ltr',
-                    sumaryHtml: ""
+                    summaryHtml: ""
                 }
             },
             methods: {
                 showSummary: function () {
                     this.drawer = true
-                    this.$refs.summary.innerHTML = this.sumaryHtml
                 },
                 renderSummary: function (url, html) {
-                    this.sumaryHtml = html
+                    this.summaryHtml = html
                 },
                 renderContent: function (url, html) {
                     this.$refs.content.innerHTML = html
